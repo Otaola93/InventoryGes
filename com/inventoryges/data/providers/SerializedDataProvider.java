@@ -21,8 +21,9 @@ public class SerializedDataProvider extends DataProvider
 		{
 			FileInputStream fis = new FileInputStream(DATABASE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
+			@SuppressWarnings("unchecked")
 			Vector<Product> stock = (Vector<Product>)ois.readObject();
-			this.addAll(stock);
+			this.addAllElements(stock);
 			ois.close();
 			fis.close();
 		}

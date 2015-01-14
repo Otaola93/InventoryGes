@@ -19,6 +19,8 @@ public abstract class DataProvider extends AbstractListModel<Product>
 
 	public void getLock()
 	{
+		if(mLocked)
+			return;
 		lock();
 		mLocked = true;
 		pull();
@@ -26,6 +28,8 @@ public abstract class DataProvider extends AbstractListModel<Product>
 
 	public void releaseLock()
 	{
+		if(!mLocked)
+			return;
 		push();
 		unlock();		
 		mLocked = false;
@@ -38,17 +42,31 @@ public abstract class DataProvider extends AbstractListModel<Product>
 		pull();
 	}
 
-	public void add(Product p)
+	protected void addElement(Product p)
 	{
 		mProducts.add(p);
 		fireIntervalAdded(this, 0, mProducts.size());
 	}
 
-	public void addAll(Collection<Product> c)
+	public void add(Product p) throws LockException
+	{
+		if(!mLocked)
+			throw new LockException("Database not locked!");
+		addElement(p);
+	}
+
+	protected void addAllElements(Collection<Product> c)
 	{
 		mProducts.clear();
 		mProducts.addAll(c);
 		fireIntervalAdded(this, 0, mProducts.size());
+	}
+
+	public void addAll(Collection<Product> c) throws LockException
+	{
+		if(!mLocked)
+			throw new LockException("Database not locked!");
+		addAllElements(c);
 	}
 
 	@Override
