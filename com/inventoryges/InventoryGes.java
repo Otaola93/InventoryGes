@@ -2,6 +2,7 @@ package com.inventoryges;
 
 import com.inventoryges.data.Product;
 import com.inventoryges.data.providers.SerializedDataProvider;
+import com.inventoryges.data.providers.LockException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ public class InventoryGes extends JFrame implements ActionListener
 {
 	private SerializedDataProvider mStock = new SerializedDataProvider();
 
-	private JList mList;
+	private JList<Product> mList;
 
 	public static void main(String args[])
 	{
@@ -36,7 +37,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		this.setSize(500, 240);
 		this.setVisible(true);
 
-		mList = new JList(mStock);
+		mList = new JList<Product>(mStock);
 		mList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		mList.setLayoutOrientation(JList.VERTICAL);
 		mList.setVisibleRowCount(-1);
@@ -70,7 +71,14 @@ public class InventoryGes extends JFrame implements ActionListener
 			mStock.releaseLock();
 			break;
 		case "Add":
-			mStock.add(new Product("ADSA"));
+			try
+			{
+				mStock.add(new Product("ADSA"));
+			}
+			catch(LockException le)
+			{
+				System.out.println(le.toString());
+			}
 			break;
 		case "Update":
 			mStock.update();
