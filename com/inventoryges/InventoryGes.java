@@ -2,8 +2,6 @@ package com.inventoryges;
 
 import com.inventoryges.data.Product;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -20,7 +18,7 @@ import javax.swing.JButton;
 
 import java.util.ArrayList;
 
-public class InventoryGes extends JFrame implements WindowListener, ActionListener
+public class InventoryGes extends JFrame implements ActionListener
 {
 	private DefaultListModel<Product> mStock = new DefaultListModel<Product>();
 
@@ -34,7 +32,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 	public InventoryGes()
 	{
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-		this.addWindowListener(this);
 		this.setTitle("StockGes");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(625, 420);
@@ -50,34 +47,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 		JButton button = new JButton("Add item");
 		button.addActionListener(this);
 		this.add(button);
-	}
-
-	public void windowOpened(WindowEvent e)
-	{
-	}
-
-	public void windowClosing(WindowEvent e) 
-	{
-	}
-
-	public void windowClosed(WindowEvent e)
-	{
-	}
-
-	public void windowIconified(WindowEvent e)
-	{
-	}
-
-	public void windowDeiconified(WindowEvent e)
-	{
-	}
-
-	public void windowActivated(WindowEvent e)
-	{
-	}
-
-	public void windowDeactivated(WindowEvent e)
-	{
 	}
 
 	public void actionPerformed(ActionEvent e)
