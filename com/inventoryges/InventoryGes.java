@@ -1,3 +1,8 @@
+package com.inventoryges;
+
+import com.inventoryges.data.DBHelper;
+import com.inventoryges.data.Product;
+
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.ActionListener;

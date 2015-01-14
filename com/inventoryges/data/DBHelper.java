@@ -1,3 +1,5 @@
+package com.inventoryges.data;
+
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;

@@ -1,10 +1,11 @@
 JFLAGS = -g -Xlint:unchecked
 JC = javac
-SOURCES = $(wildcard *.java)
+SOURCES = $(shell find com -name *.java)
 CLASSES = $(SOURCES:.java=.class)
 EXECUTABLE = InventoryGes.jar
 MANIFEST = MANIFEST.MF
 RESOURCES = $(wildcard resources/*)
+
 .PHONY: clean test all
 
 %.class:	%.java
