@@ -29,7 +29,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 
 	public static void main(String args[])
 	{
-		// TODO: Show a SplashScreen and load database with the splash...
 		new InventoryGes();
 	}
 
