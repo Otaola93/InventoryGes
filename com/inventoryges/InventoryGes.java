@@ -113,6 +113,9 @@ public class InventoryGes extends JFrame implements ActionListener
 		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		this.getContentPane().add(add, constraints);
 
+		// Try to get the latest version of the database...
+		mStock.update();
+
 		// Show window...
 		this.pack();
 		this.setVisible(true);
