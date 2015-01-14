@@ -17,6 +17,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class InventoryGes extends JFrame implements ActionListener
 {
@@ -24,6 +26,31 @@ public class InventoryGes extends JFrame implements ActionListener
 
 	public static void main(String args[])
 	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(UnsupportedLookAndFeelException e)
+		{
+			// handle exception
+			System.out.println(e.toString());
+		}
+		catch(ClassNotFoundException e)
+		{
+			// handle exception
+			System.out.println(e.toString());
+		}
+		catch(InstantiationException e)
+		{
+			// handle exception
+			System.out.println(e.toString());
+		}
+		catch(IllegalAccessException e)
+		{
+			// handle exception
+			System.out.println(e.toString());
+		}
+
 		new InventoryGes();
 	}
 
