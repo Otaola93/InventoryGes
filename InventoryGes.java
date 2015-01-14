@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class InventoryGes extends JFrame implements WindowListener, ActionListener
 {
-	private DefaultListModel<Producto> mStock;
+	private DefaultListModel<Product> mStock;
 
 	private JList mList;
 
@@ -81,6 +81,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 
 	public void actionPerformed(ActionEvent e)
 	{
-		mStock.addElement(new Producto("ADSA"));
+		mStock.addElement(new Product("ADSA"));
 	}
 }

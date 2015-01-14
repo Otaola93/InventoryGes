@@ -11,21 +11,21 @@ public class DBHelper
 {
 	private final static String DATABASE = "database.ser";
 
-	public static DefaultListModel<Producto> load()
+	public static DefaultListModel<Product> load()
 	{
-		DefaultListModel<Producto> stock = null;
+		DefaultListModel<Product> stock = null;
 		try
 		{
 			FileInputStream fis = new FileInputStream(DATABASE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			stock = (DefaultListModel<Producto>)ois.readObject();
+			stock = (DefaultListModel<Product>)ois.readObject();
 			ois.close();
 			fis.close();
 		}
 		catch(FileNotFoundException e)
 		{
 			System.out.println("No database file found. Continuing...");
-			stock = new DefaultListModel<Producto>();
+			stock = new DefaultListModel<Product>();
 		}
 		catch(IOException e)
 		{
@@ -38,7 +38,7 @@ public class DBHelper
 		return stock;
 	}
 
-	public static void save(DefaultListModel<Producto> stock)
+	public static void save(DefaultListModel<Product> stock)
 	{
 		try
 		{
