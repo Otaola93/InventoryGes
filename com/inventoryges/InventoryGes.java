@@ -1,5 +1,6 @@
 package com.inventoryges;
 
+import com.inventoryges.CreateNewItem;
 import com.inventoryges.data.Product;
 import com.inventoryges.data.providers.SerializedDataProvider;
 import com.inventoryges.data.providers.LockException;
@@ -123,14 +124,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		switch(e.getActionCommand())
 		{
 		case "Add":
-			try
-			{
-				mStock.add(new Product("ADSA"));
-			}
-			catch(LockException le)
-			{
-				System.out.println(le.toString());
-			}
+			new CreateNewItem();
 			break;
 		case "Update":
 			mStock.update();
