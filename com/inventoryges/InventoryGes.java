@@ -177,7 +177,9 @@ public class InventoryGes extends JFrame implements ActionListener
 		case "Add":
 			try
 			{
+				mStock.getLock();
 				mStock.add(new Transaction());
+				mStock.releaseLock();
 			}
 			catch(LockException le)
 			{
