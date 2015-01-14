@@ -1,6 +1,6 @@
 package com.inventoryges;
 
-import com.inventoryges.data.Product;
+import com.inventoryges.data.Transaction;
 import com.inventoryges.data.providers.SerializedDataProvider;
 import com.inventoryges.data.providers.LockException;
 
@@ -99,8 +99,8 @@ public class InventoryGes extends JFrame implements ActionListener
 		this.getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 
-		// Products list...
-		JList<Product> list = new JList<Product>(mStock);
+		// Transactions list...
+		JList<Transaction> list = new JList<Transaction>(mStock);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 		list.setVisibleRowCount(-1);
@@ -177,7 +177,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		case "Add":
 			try
 			{
-				mStock.add(new Product("ADSA"));
+				mStock.add(new Transaction());
 			}
 			catch(LockException le)
 			{

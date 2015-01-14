@@ -1,16 +1,16 @@
 package com.inventoryges.data.providers;
 
-import com.inventoryges.data.Product;
+import com.inventoryges.data.Transaction;
 
 import javax.swing.AbstractListModel;
 
 import java.util.Collection;
 import java.util.Vector;
 
-public abstract class DataProvider extends AbstractListModel<Product>
+public abstract class DataProvider extends AbstractListModel<Transaction>
 {
 	private boolean mLocked = false;
-	protected Vector<Product> mProducts = new Vector<Product>();
+	protected Vector<Transaction> mTransactions = new Vector<Transaction>();
 
 	protected abstract void pull();
 	protected abstract void push();
@@ -42,27 +42,27 @@ public abstract class DataProvider extends AbstractListModel<Product>
 		pull();
 	}
 
-	protected void addElement(Product p)
+	protected void addElement(Transaction p)
 	{
-		mProducts.add(p);
-		fireIntervalAdded(this, 0, mProducts.size());
+		mTransactions.add(p);
+		fireIntervalAdded(this, 0, mTransactions.size());
 	}
 
-	public void add(Product p) throws LockException
+	public void add(Transaction p) throws LockException
 	{
 		if(!mLocked)
 			throw new LockException("Database not locked!");
 		addElement(p);
 	}
 
-	protected void addAllElements(Collection<Product> c)
+	protected void addAllElements(Collection<Transaction> c)
 	{
-		mProducts.clear();
-		mProducts.addAll(c);
-		fireIntervalAdded(this, 0, mProducts.size());
+		mTransactions.clear();
+		mTransactions.addAll(c);
+		fireIntervalAdded(this, 0, mTransactions.size());
 	}
 
-	public void addAll(Collection<Product> c) throws LockException
+	public void addAll(Collection<Transaction> c) throws LockException
 	{
 		if(!mLocked)
 			throw new LockException("Database not locked!");
@@ -70,14 +70,14 @@ public abstract class DataProvider extends AbstractListModel<Product>
 	}
 
 	@Override
-	public Product getElementAt(int pos)
+	public Transaction getElementAt(int pos)
 	{
-		return mProducts.get(pos);
+		return mTransactions.get(pos);
 	}
 
 	@Override
 	public int getSize()
 	{
-		return mProducts.size();
+		return mTransactions.size();
 	}	
 }

@@ -1,6 +1,6 @@
 package com.inventoryges.data.providers;
 
-import com.inventoryges.data.Product;
+import com.inventoryges.data.Transaction;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ public class SerializedDataProvider extends DataProvider
 			FileInputStream fis = new FileInputStream(DATABASE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			@SuppressWarnings("unchecked")
-			Vector<Product> stock = (Vector<Product>)ois.readObject();
+			Vector<Transaction> stock = (Vector<Transaction>)ois.readObject();
 			this.addAllElements(stock);
 			ois.close();
 			fis.close();
@@ -48,7 +48,7 @@ public class SerializedDataProvider extends DataProvider
 		{
 			FileOutputStream fos = new FileOutputStream(DATABASE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(mProducts);
+			oos.writeObject(mTransactions);
 			oos.close();
 			fos.close();
 		}
