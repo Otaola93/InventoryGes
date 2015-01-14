@@ -77,7 +77,10 @@ public class InventoryGes extends JFrame implements ActionListener
 		constraints.gridx = 0;	// Start on column 0
 		constraints.gridy = 0;	// Start on row 0
 		constraints.gridwidth = 2;	// 1 column width
-		constraints.gridheight = GridBagConstraints.RELATIVE;	// Height until next component
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 1.0;	// Fill with priority
+		constraints.weighty = 1.0;	// Fill with priority
+		constraints.fill = GridBagConstraints.BOTH;	// Fill in both directions
 		this.getContentPane().add(pane, constraints);
 
 		// Sync button...
@@ -90,6 +93,9 @@ public class InventoryGes extends JFrame implements ActionListener
 		constraints.gridy = 1;	// Start on row 1
 		constraints.gridwidth = 1;	// 1 column width
 		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 0.5;	// Half of the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		this.getContentPane().add(update, constraints);
 
 		// Add button...
@@ -102,6 +108,9 @@ public class InventoryGes extends JFrame implements ActionListener
 		constraints.gridy = 1;	// Start on row 1
 		constraints.gridwidth = 1;	// 1 column width
 		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 0.5;	// Half of the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		this.getContentPane().add(add, constraints);
 
 		// Show window...
