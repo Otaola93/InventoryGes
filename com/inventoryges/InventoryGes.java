@@ -1,6 +1,5 @@
 package com.inventoryges;
 
-import com.inventoryges.data.DBHelper;
 import com.inventoryges.data.Product;
 
 import java.awt.event.WindowEvent;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 
 public class InventoryGes extends JFrame implements WindowListener, ActionListener
 {
-	private DefaultListModel<Product> mStock;
+	private DefaultListModel<Product> mStock = new DefaultListModel<Product>();
 
 	private JList mList;
 
@@ -42,7 +41,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 		this.setSize(500, 240);
 		this.setVisible(true);
 
-		mStock = DBHelper.load();
 		mList = new JList(mStock);
 		mList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		mList.setLayoutOrientation(JList.VERTICAL);
@@ -60,7 +58,6 @@ public class InventoryGes extends JFrame implements WindowListener, ActionListen
 
 	public void windowClosing(WindowEvent e) 
 	{
-		DBHelper.save(mStock);	
 	}
 
 	public void windowClosed(WindowEvent e)
