@@ -25,10 +25,6 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-
-//TODO:
-import java.lang.Thread;
-
 public class InventoryGes extends JFrame implements ActionListener
 {
 	private SerializedDataProvider mStock = new SerializedDataProvider();
