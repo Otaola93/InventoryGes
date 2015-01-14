@@ -9,6 +9,11 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SplashScreen;
+import java.awt.Graphics2D;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
@@ -19,6 +24,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+
+//TODO:
+import java.lang.Thread;
 
 public class InventoryGes extends JFrame implements ActionListener
 {
@@ -56,6 +65,37 @@ public class InventoryGes extends JFrame implements ActionListener
 
 	public InventoryGes()
 	{
+		// Get the splash screen handler...
+		SplashScreen splash = SplashScreen.getSplashScreen();
+		if(splash == null)
+		{
+			System.out.println("Could not manage the splash screen...");
+			return;
+		}
+		Rectangle splashBounds = splash.getBounds();
+		Rectangle textBounds = new Rectangle(0, (int)splashBounds.getHeight()-20, (int)splashBounds.getWidth(), 20);
+		int textX = 10;
+		int textY = (int)textBounds.getY() + 15;
+
+		// For drawing on the splash...
+		Graphics2D splashGraphics = splash.createGraphics();
+		if(splashGraphics == null)
+		{
+			System.out.println("Cannot draw on splash screen...");
+			return;
+		}
+
+		// Tell what are we doing...
+		splashGraphics.setComposite(AlphaComposite.Clear);
+		splashGraphics.fill(textBounds);
+		splashGraphics.setPaintMode();
+		splashGraphics.setColor(Color.BLACK);
+		splashGraphics.fill(textBounds);
+		splashGraphics.setColor(Color.WHITE);
+		splashGraphics.drawString("Building the interface...", textX, textY);
+		splash.update();
+
+		// Start creating the window...
 		this.setTitle("InventoryGes");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -113,8 +153,21 @@ public class InventoryGes extends JFrame implements ActionListener
 		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		this.getContentPane().add(add, constraints);
 
+		// Tell what are we doing...
+		splashGraphics.setComposite(AlphaComposite.Clear);
+		splashGraphics.fill(textBounds);
+		splashGraphics.setPaintMode();
+		splashGraphics.setColor(Color.BLACK);
+		splashGraphics.fill(textBounds);
+		splashGraphics.setColor(Color.WHITE);
+		splashGraphics.drawString("Opening database...", textX, textY);
+		splash.update();
+
 		// Try to get the latest version of the database...
 		mStock.update();
+
+		// Hide splash...
+		splash.close();
 
 		// Show window...
 		this.pack();
