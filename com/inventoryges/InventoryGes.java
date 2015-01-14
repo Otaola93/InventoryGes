@@ -122,7 +122,6 @@ public class InventoryGes extends JFrame implements ActionListener
 		// Sync button...
 		JButton update = new JButton("Update");
 		update.addActionListener(this);
-		this.add(update);
 
 		// Add the sync button...
 		constraints.gridx = 0;	// Start on column 0
@@ -137,9 +136,8 @@ public class InventoryGes extends JFrame implements ActionListener
 		// Add button...
 		JButton add = new JButton("Add");
 		add.addActionListener(this);
-		this.add(add);
 
-		// Add the sync button...
+		// Add the add button...
 		constraints.gridx = 1;	// Start on column 1
 		constraints.gridy = 1;	// Start on row 1
 		constraints.gridwidth = 1;	// 1 column width
@@ -175,16 +173,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		switch(e.getActionCommand())
 		{
 		case "Add":
-			try
-			{
-				mStock.getLock();
-				mStock.add(new Transaction());
-				mStock.releaseLock();
-			}
-			catch(LockException le)
-			{
-				System.out.println(le.toString());
-			}
+			new AddNewTransaction();
 			break;
 		case "Update":
 			mStock.update();
