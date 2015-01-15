@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import net.sourceforge.jdatepicker.impl.SqlDateModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
@@ -116,7 +116,7 @@ public class AddTransaction extends JFrame implements ActionListener
 		this.getContentPane().add(dateLabel, constraints);
 
 		// Date picker...
-		UtilDateModel dateModel = new UtilDateModel();
+		SqlDateModel dateModel = new SqlDateModel(mTransaction.getDate());
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 
