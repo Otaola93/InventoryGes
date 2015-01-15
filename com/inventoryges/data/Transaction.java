@@ -29,6 +29,11 @@ public class Transaction implements Serializable
 		return mDate;
 	}
 
+	public void setDate(Date d)
+	{
+		mDate = d;
+	}
+
 	@Override
 	public String toString()
 	{

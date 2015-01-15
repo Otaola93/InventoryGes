@@ -41,6 +41,7 @@ public class AddTransaction extends JFrame implements ActionListener
 {
 
 	private Transaction mTransaction;
+	private SqlDateModel mDateModel;
 
 	public AddTransaction()
 	{
@@ -116,8 +117,9 @@ public class AddTransaction extends JFrame implements ActionListener
 		this.getContentPane().add(dateLabel, constraints);
 
 		// Date picker...
-		SqlDateModel dateModel = new SqlDateModel(mTransaction.getDate());
-		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel);
+		mDateModel = new SqlDateModel(mTransaction.getDate());
+		JDatePanelImpl datePanel = new JDatePanelImpl(mDateModel);
+		datePanel.addActionListener(this);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 
 		// Add date picker to layout...
@@ -189,6 +191,9 @@ public class AddTransaction extends JFrame implements ActionListener
 			break;
 		case "Sale":
 			mTransaction.setType(TransactionType.SALE);
+			break;
+		case "Date selected":
+			mTransaction.setDate(mDateModel.getValue());
 			break;
 		case "Cancel":
 			// TODO
