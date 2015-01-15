@@ -27,7 +27,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class InventoryGes extends JFrame implements ActionListener
 {
-	private SerializedDataProvider mStock = new SerializedDataProvider();
+	private SerializedDataProvider mTransactions = new SerializedDataProvider();
 
 	public static void main(String args[])
 	{
@@ -100,7 +100,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		GridBagConstraints constraints = new GridBagConstraints();
 
 		// Transactions list...
-		JList<Transaction> list = new JList<Transaction>(mStock);
+		JList<Transaction> list = new JList<Transaction>(mTransactions);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setLayoutOrientation(JList.VERTICAL);
 		list.setVisibleRowCount(-1);
@@ -158,7 +158,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		splash.update();
 
 		// Try to get the latest version of the database...
-		mStock.update();
+		mTransactions.update();
 
 		// Hide splash...
 		splash.close();
@@ -173,10 +173,10 @@ public class InventoryGes extends JFrame implements ActionListener
 		switch(e.getActionCommand())
 		{
 		case "Add":
-			new AddTransaction();
+			new AddTransaction(mTransactions);
 			break;
 		case "Update":
-			mStock.update();
+			mTransactions.update();
 			break;
 		}
 	}

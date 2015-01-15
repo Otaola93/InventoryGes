@@ -2,6 +2,8 @@ package com.inventoryges;
 
 import com.inventoryges.data.Transaction;
 import com.inventoryges.data.TransactionType;
+import com.inventoryges.data.providers.DataProvider;
+import com.inventoryges.data.providers.LockException;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -13,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 import net.sourceforge.jdatepicker.impl.SqlDateModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -39,12 +42,15 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
  */
 public class AddTransaction extends JFrame implements ActionListener
 {
-
+	private DataProvider mTransactions;
 	private Transaction mTransaction;
 	private SqlDateModel mDateModel;
 
-	public AddTransaction()
+	public AddTransaction(DataProvider t)
 	{
+		// Backup parameters...
+		mTransactions = t;
+
 		// Initialize the transaction object...
 		mTransaction = new Transaction();
 
@@ -196,10 +202,20 @@ public class AddTransaction extends JFrame implements ActionListener
 			mTransaction.setDate(mDateModel.getValue());
 			break;
 		case "Cancel":
-			// TODO
+			this.dispose();
 			break;
 		case "Add":
-			// TODO
+			try
+			{
+				mTransactions.getLock();
+				mTransactions.add(mTransaction);
+				mTransactions.releaseLock();
+				this.dispose();
+			}
+			catch(LockException le)
+			{
+				JOptionPane.showMessageDialog(this, "Could not acquire database lock! Try again!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 			break;
 		}
 	}
