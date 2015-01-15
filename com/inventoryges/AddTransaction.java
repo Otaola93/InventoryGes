@@ -14,6 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+
 /**
  *     Col 1         Col2
  *  -------------------------
@@ -104,16 +108,27 @@ public class AddTransaction extends JFrame implements ActionListener
 		// Add the date label...
 		constraints.gridx = 0;	// Start on column 0
 		constraints.gridy = 2;	// Start on row 2
-		constraints.gridwidth = 2;	// 1 column width
+		constraints.gridwidth = 2;	// 2 column width
 		constraints.gridheight = 1;	// 1 row height
 		constraints.weightx = 1.0;	// All the width
 		constraints.weighty = 0.0;	// No verticall fill
 		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		this.getContentPane().add(dateLabel, constraints);
 
-		// TODO: Date picker...
+		// Date picker...
+		UtilDateModel dateModel = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 
-		// TODO: Add date picker to layout...
+		// Add date picker to layout...
+		constraints.gridx = 0;	// Start on column 0
+		constraints.gridy = 3;	// Start on row 3
+		constraints.gridwidth = 2;	// 2 column width
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 1.0;	// All the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
+		this.getContentPane().add(datePicker, constraints);
 
 		// Products label
 		JLabel productsLabel = new JLabel("Products:");
