@@ -173,7 +173,7 @@ public class InventoryGes extends JFrame implements ActionListener
 		switch(e.getActionCommand())
 		{
 		case "Add":
-			new AddNewTransaction();
+			new AddTransaction();
 			break;
 		case "Update":
 			mStock.update();

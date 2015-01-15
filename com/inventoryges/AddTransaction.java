@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -20,13 +21,24 @@ import javax.swing.ButtonGroup;
  *  -------------------------
  * | (X)PURCHASE | ( )SALE   |
  *  -------------------------
+ * | Date:                   |
+ *  -------------------------
+ * | [ Date chooser...     ] |
+ *  -------------------------
+ * | Products:               |
+ *  -------------------------
+ * | ??????????????????????? |
+ * | ??????????????????????? |
+ *  -------------------------
+ * | [Cancel]     | [Add]    |
+ *  -------------------------
  */
-public class AddNewTransaction extends JFrame implements ActionListener
+public class AddTransaction extends JFrame implements ActionListener
 {
 
 	private Transaction mTransaction;
 
-	public AddNewTransaction()
+	public AddTransaction()
 	{
 		// Initialize the transaction object...
 		mTransaction = new Transaction();
@@ -86,6 +98,68 @@ public class AddNewTransaction extends JFrame implements ActionListener
 		group.add(purchaseRadioButton);
 		group.add(saleRadioButton);
 
+		// Date label
+		JLabel dateLabel = new JLabel("Date:");
+
+		// Add the date label...
+		constraints.gridx = 0;	// Start on column 0
+		constraints.gridy = 2;	// Start on row 2
+		constraints.gridwidth = 2;	// 1 column width
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 1.0;	// All the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
+		this.getContentPane().add(dateLabel, constraints);
+
+		// TODO: Date picker...
+
+		// TODO: Add date picker to layout...
+
+		// Products label
+		JLabel productsLabel = new JLabel("Products:");
+
+		// Add the date label...
+		constraints.gridx = 0;	// Start on column 0
+		constraints.gridy = 4;	// Start on row 4
+		constraints.gridwidth = 2;	// 1 column width
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 1.0;	// All the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
+		this.getContentPane().add(productsLabel, constraints);
+
+		// TODO: Product picker...
+
+		// TODO: Add product picker to layout...
+
+		// Cancel button...
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.addActionListener(this);
+
+		// Add the cancel button...
+		constraints.gridx = 0;	// Start on column 0
+		constraints.gridy = 6;	// Start on row 6
+		constraints.gridwidth = 1;	// 1 column width
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 0.5;	// Half the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
+		this.getContentPane().add(cancelButton, constraints);
+
+		// Add button...
+		JButton addButton = new JButton("Add");
+		addButton.addActionListener(this);
+
+		// Add the add button...
+		constraints.gridx = 1;	// Start on column 1
+		constraints.gridy = 6;	// Start on row 6
+		constraints.gridwidth = 1;	// 1 column width
+		constraints.gridheight = 1;	// 1 row height
+		constraints.weightx = 0.5;	// Half the width
+		constraints.weighty = 0.0;	// No verticall fill
+		constraints.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
+		this.getContentPane().add(addButton, constraints);
+
 		// Show window...
 		this.pack();
 		this.setVisible(true);
@@ -100,6 +174,12 @@ public class AddNewTransaction extends JFrame implements ActionListener
 			break;
 		case "Sale":
 			mTransaction.setType(TransactionType.SALE);
+			break;
+		case "Cancel":
+			// TODO
+			break;
+		case "Add":
+			// TODO
 			break;
 		}
 	}
