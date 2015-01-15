@@ -18,7 +18,7 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
-import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
@@ -100,13 +100,12 @@ public class InventoryGes extends JFrame implements ActionListener
 		GridBagConstraints constraints = new GridBagConstraints();
 
 		// Transactions list...
-		JList<Transaction> list = new JList<Transaction>(mTransactions);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setLayoutOrientation(JList.VERTICAL);
-		list.setVisibleRowCount(-1);
+		JTable table = new JTable(new TransactionTableModel(mTransactions));
+		table.setFillsViewportHeight(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Inside a scroll...
-		JScrollPane pane = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane pane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pane.setPreferredSize(new Dimension(300, 200));
 
 		// Add the list to GridBag...

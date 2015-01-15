@@ -19,6 +19,11 @@ public class Transaction implements Serializable
 		mProducts = new Vector<Pair<Product,Integer>>();
 	}
 
+	public TransactionType getType()
+	{
+		return mType;
+	}
+
 	public void setType(TransactionType t)
 	{
 		mType = t;
