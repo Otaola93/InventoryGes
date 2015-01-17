@@ -40,7 +40,7 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
  * | [Cancel]     | [Add]    |
  *  -------------------------
  */
-public class AddTransaction extends JFrame implements ActionListener
+public class AddTransaction extends JFrame implements ActionListener, Runnable
 {
 	private DataProvider mTransactions;
 	private Transaction mTransaction;
@@ -205,18 +205,23 @@ public class AddTransaction extends JFrame implements ActionListener
 			this.dispose();
 			break;
 		case "Add":
-			try
-			{
-				mTransactions.getLock();
-				mTransactions.add(mTransaction);
-				mTransactions.releaseLock();
-				this.dispose();
-			}
-			catch(LockException le)
-			{
-				JOptionPane.showMessageDialog(this, "Could not acquire database lock! Try again!", "Error", JOptionPane.ERROR_MESSAGE);
-			}
+			new ProgressDialog(this, this, "Adding transaction to database...");
 			break;
+		}
+	}
+
+	public void run()
+	{
+		try
+		{
+			mTransactions.getLock();
+			mTransactions.add(mTransaction);
+			mTransactions.releaseLock();
+			this.dispose();
+		}
+		catch(LockException le)
+		{
+			JOptionPane.showMessageDialog(this, "Could not acquire database lock! Try again!", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
