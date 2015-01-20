@@ -1,16 +1,16 @@
 package com.inventoryges.data.providers;
 
-import com.inventoryges.data.Product;
-
-import javax.swing.AbstractListModel;
+import com.inventoryges.data.Transaction;
 
 import java.util.Collection;
 import java.util.Vector;
+import java.util.ArrayList;
 
-public abstract class DataProvider extends AbstractListModel<Product>
+public abstract class DataProvider
 {
 	private boolean mLocked = false;
-	protected Vector<Product> mProducts = new Vector<Product>();
+	protected Vector<Transaction> mTransactions = new Vector<Transaction>();
+	private ArrayList<DataChangedListener> mListeners = new ArrayList<DataChangedListener>();
 
 	protected abstract void pull();
 	protected abstract void push();
@@ -42,42 +42,47 @@ public abstract class DataProvider extends AbstractListModel<Product>
 		pull();
 	}
 
-	protected void addElement(Product p)
+	public void addListener(DataChangedListener l)
 	{
-		mProducts.add(p);
-		fireIntervalAdded(this, 0, mProducts.size());
+		mListeners.add(l);
 	}
 
-	public void add(Product p) throws LockException
+	protected void addElement(Transaction p)
+	{
+		mTransactions.add(p);
+		for(DataChangedListener l : mListeners)
+			l.dataAdded();
+	}
+
+	public void add(Transaction p) throws LockException
 	{
 		if(!mLocked)
 			throw new LockException("Database not locked!");
 		addElement(p);
 	}
 
-	protected void addAllElements(Collection<Product> c)
+	protected void addAllElements(Collection<Transaction> c)
 	{
-		mProducts.clear();
-		mProducts.addAll(c);
-		fireIntervalAdded(this, 0, mProducts.size());
+		mTransactions.clear();
+		mTransactions.addAll(c);
+		for(DataChangedListener l : mListeners)
+			l.dataAllAdded();
 	}
 
-	public void addAll(Collection<Product> c) throws LockException
+	public void addAll(Collection<Transaction> c) throws LockException
 	{
 		if(!mLocked)
 			throw new LockException("Database not locked!");
 		addAllElements(c);
 	}
 
-	@Override
-	public Product getElementAt(int pos)
+	public Transaction get(int i)
 	{
-		return mProducts.get(pos);
+		return mTransactions.get(i);
 	}
 
-	@Override
-	public int getSize()
+	public int size()
 	{
-		return mProducts.size();
-	}	
+		return mTransactions.size();
+	}
 }
